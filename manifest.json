@@ -1,0 +1,20 @@
+{
+  "name": "日本の方言クイズ",
+  "short_name": "方言クイズ",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FDF9EE",
+  "theme_color": "#27ae60",
+  "icons": [
+    {
+      "src": "icon-192.ipeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "icon-512.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

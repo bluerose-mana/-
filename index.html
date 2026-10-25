@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+      }
+    </script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方言クイズ</title>
+    
+    <!-- Google Fonts (Kosugi Maru) の読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    
+    <!-- スタイルシートの読み込み -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <!-- ==================== ホーム画面 ==================== -->
+        <section id="home-screen" class="screen active">
+            <div class="title-area">
+                <h1 id="title-text">日本の方言クイズ</h1>
+            </div>
+            
+            <!-- 難易度選択ボタン -->
+            <div class="mode-selection">
+                <button class="mode-btn" data-level="beginner" id="btn-beginner">初級スタート</button>
+                <button class="mode-btn" data-level="intermediate" id="btn-intermediate">中級スタート</button>
+                <button class="mode-btn" data-level="advanced" id="btn-advanced">上級スタート</button>
+            </div>
+
+            <!-- 言語切り替えボタン -->
+            <button id="lang-toggle-btn" class="secondary-btn">言語変更 / Language</button>
+        </section>
+
+        <!-- ==================== ローディング画面 ==================== -->
+        <section id="loading-screen" class="screen hidden">
+            <div class="loader"></div>
+            <p id="loading-text">問題を生成中...</p>
+        </section>
+
+        <!-- ==================== クイズ画面 ==================== -->
+        <section id="quiz-screen" class="screen hidden">
+            <!-- 上部バー（難易度表示 ＆ やめるボタン） -->
+            <div class="top-bar-wrapper">
+                <div id="difficulty-bar" class="difficulty-bar">初級</div>
+                <button id="quit-btn" class="quit-btn" aria-label="やめる">×</button>
+            </div>
+            
+            <!-- クイズヘッダー（タイマー・問題単語・進捗） -->
+            <div class="quiz-header">
+                <div class="timer-pie-container">
+                    <div id="timer-pie" class="timer-pie"></div>
+                </div>
+                
+                <div class="question-center">
+                    <p id="question-region">【〜地方】</p>
+                    <p id="dialect-word" class="highlight-word">おおきに</p>
+                </div>
+                
+                <div id="progress-text" class="progress-circle">1/10</div>
+            </div>
+
+            <!-- 4択の選択肢ボタン（JavaScriptで動的に生成） -->
+            <div id="options-container" class="options"></div>
+
+            <!-- ギブアップ（わからない）ボタン -->
+            <button id="idk-btn" class="secondary-btn">わからない</button>
+
+            <!-- 正誤判定（〇 / ✕）のオーバーレイ表示 -->
+            <div id="feedback-overlay" class="hidden"></div>
+        </section>
+
+        <!-- ==================== 結果画面 ==================== -->
+        <section id="result-screen" class="screen hidden">
+            <div id="result-difficulty-bar" class="difficulty-bar">初級</div>
+            <h2 id="score-text">〜点</h2>
+            <button id="home-btn" class="secondary-btn">スタートに戻る</button>
+            
+            <!-- 間違えた問題の復習リスト（アコーディオン形式） -->
+            <div id="wrong-list-container" class="wrong-list-container">
+                <h3 class="wrong-list-title">間違えた語句</h3>
+                <div id="wrong-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- スクリプトの読み込み -->
+    <script src="main.js"></script>
+</body>
+</html>
